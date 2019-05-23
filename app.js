@@ -16,7 +16,7 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // Mongo URI
-const mongoURI = 'mongodb://brad:brad@ds257838.mlab.com:57838/mongouploads';
+const mongoURI = 'mongodb://localhost/mongouploads';
 
 // Create mongo connection
 const conn = mongoose.createConnection(mongoURI);
@@ -61,8 +61,8 @@ app.get('/', (req, res) => {
     } else {
       files.map(file => {
         if (
-          file.contentType === 'image/jpeg' ||
-          file.contentType === 'image/png'
+            file.contentType === 'image/jpeg' ||
+            file.contentType === 'image/png'
         ) {
           file.isImage = true;
         } else {
@@ -77,8 +77,8 @@ app.get('/', (req, res) => {
 // @route POST /upload
 // @desc  Uploads file to DB
 app.post('/upload', upload.single('file'), (req, res) => {
-  // res.json({ file: req.file });
-  res.redirect('/');
+  res.json({ file: req.file });
+  // res.redirect('/');
 });
 
 // @route GET /files
